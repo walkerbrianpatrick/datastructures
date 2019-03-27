@@ -4,17 +4,15 @@
 
   <parent>
     <groupId>org.walker.datastructures</groupId>
-    <artifactId>root</artifactId>
+    <artifactId>stacks_and_queues</artifactId>
     <version>1.0</version>
   </parent>
 
-  <artifactId>stacks_and_queues</artifactId>
-  <packaging>pom</packaging>
+  <artifactId>stack</artifactId>
 
   <modules>
-	  <module>stack</module>
-	  <module>queue</module>
   </modules>
+
 
 
 
