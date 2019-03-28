@@ -11,8 +11,8 @@ public class StackLong {
 		elements = new long[numElements];
 		top = -1;
 	}
-	public void push(Object value) {
-		elements[++top] = (Long)value;
+	public void push(long value) {
+		elements[++top] = value;
 	}
 	public long pop() {
 		return elements[top--];
