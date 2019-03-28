@@ -1,5 +1,7 @@
 package org.walker.datastructures.stacksandqueues;
 
+import java.util.Arrays;
+
 public class StackChar{
 
 	private char[] elements;
@@ -29,7 +31,11 @@ public class StackChar{
 	public boolean isFull() {
 		return top==numElements-1;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "StackChar [elements=" + Arrays.toString(elements) + ", numElements=" + numElements + ", top=" + top
+				+ "]";
+	}
 	
 }

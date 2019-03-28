@@ -9,7 +9,8 @@
 
 
   <modules>
-    <module>stacks_and_queues</module>
+	  <module>stacks_and_queues</module>
+	  <module>algorithms</module>
   </modules>
 
 
