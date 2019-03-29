@@ -75,6 +75,16 @@ public class TestBinaryTree {
 		assert(node.getData() == 42.0);		
 	}
 	
+	@Test
+	public void visitInOrderAndPrint() {
+		BinaryTree btree = new BinaryTree();
+		initSimpleTree(btree);
+		btree.visitTreeInOrder((node)->{
+			System.out.println(((Node)node).getKey());
+		});
+		assert(true);
+	}
+	
 	private void initSimpleTree(BinaryTree btree) {
 		btree.insert(5, 7.0);
 		btree.insert(3, 11.0);

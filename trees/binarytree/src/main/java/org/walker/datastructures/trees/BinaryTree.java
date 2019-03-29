@@ -1,5 +1,7 @@
 package org.walker.datastructures.trees;
 
+import java.util.function.Consumer;
+
 public class BinaryTree {
 	private Node root;
 
@@ -21,6 +23,20 @@ public class BinaryTree {
 		walkDelete(root,key);
 	}
 
+	public void visitTreeInOrder(Consumer<Node> visitor) {
+		inOrder(root, visitor);
+	}
+	
+	private void inOrder(Node node, Consumer<Node> visitor) {
+		if (node == null) {
+			return;
+		} else {
+			inOrder(node.getLeftChild(), visitor);
+			visitor.accept(node);
+			inOrder(node.getRightChild(), visitor);
+		}
+	}
+	
 	private Node walkFind(Node node, int key) {
 		// catch the null case
 		if(node == null) {
