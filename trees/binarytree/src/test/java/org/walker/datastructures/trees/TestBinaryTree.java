@@ -9,7 +9,7 @@ public class TestBinaryTree {
 	
 	@Test
 	public void insert() {
-		BinaryTree btree = new BinaryTree();
+		KeyValueBinaryTree btree = new KeyValueBinaryTree();
 		
 		btree.insert(5, 7.0);
 		btree.insert(3, 11.0);
@@ -22,7 +22,7 @@ public class TestBinaryTree {
 	
 	@Test
 	public void find() {
-		BinaryTree btree = new BinaryTree();
+		KeyValueBinaryTree btree = new KeyValueBinaryTree();
 		initSimpleTree(btree);
 		
 		double foundVal = btree.find(4).getData();
@@ -31,7 +31,7 @@ public class TestBinaryTree {
 	
 	@Test
 	public void deleteParentNode() {
-		BinaryTree btree = new BinaryTree();
+		KeyValueBinaryTree btree = new KeyValueBinaryTree();
 		initSimpleTree(btree);
 		
 		btree.delete(3);
@@ -42,7 +42,7 @@ public class TestBinaryTree {
 	
 	@Test 
 	public void deleteChildNode() {
-		BinaryTree btree = new BinaryTree();
+		KeyValueBinaryTree btree = new KeyValueBinaryTree();
 		initSimpleTree(btree);
 		
 		btree.delete(4);
@@ -53,7 +53,7 @@ public class TestBinaryTree {
 	
 	@Test
 	public void deleteAndCheckGraftIntegrity() {
-		BinaryTree btree = new BinaryTree();
+		KeyValueBinaryTree btree = new KeyValueBinaryTree();
 		initSimpleTree(btree);
 		
 		btree.delete(3);
@@ -65,7 +65,7 @@ public class TestBinaryTree {
 	
 	@Test 
 	public void deleteRoot() {
-		BinaryTree btree = new BinaryTree();
+		KeyValueBinaryTree btree = new KeyValueBinaryTree();
 		initSimpleTree(btree);
 		
 		btree.delete(5);
@@ -77,7 +77,7 @@ public class TestBinaryTree {
 	
 	@Test
 	public void visitInOrderAndPrint() {
-		BinaryTree btree = new BinaryTree();
+		KeyValueBinaryTree btree = new KeyValueBinaryTree();
 		initSimpleTree(btree);
 		btree.visitTreeInOrder((node)->{
 			System.out.println(((KeyValueNode)node).getKey());
@@ -85,7 +85,7 @@ public class TestBinaryTree {
 		assert(true);
 	}
 	
-	private void initSimpleTree(BinaryTree btree) {
+	private void initSimpleTree(KeyValueBinaryTree btree) {
 		btree.insert(5, 7.0);
 		btree.insert(3, 11.0);
 		btree.insert(4, 42.0);

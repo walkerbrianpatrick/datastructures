@@ -2,7 +2,7 @@ package org.walker.datastructures.trees;
 
 import java.util.function.Consumer;
 
-public class BinaryTree {
+public class KeyValueBinaryTree {
 	private KeyValueNode root;
 
 	public KeyValueNode find(int key) {
