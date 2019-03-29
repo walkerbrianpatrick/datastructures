@@ -1,18 +1,18 @@
 package org.walker.datastructures.trees;
 
-public class Node {
+public class KeyValueNode {
 	private int key;
 	private double data;
-	private Node leftChild;
-	private Node rightChild;
+	private KeyValueNode leftChild;
+	private KeyValueNode rightChild;
 	
-	public Node(int key, double data) {
+	public KeyValueNode(int key, double data) {
 		super();
 		this.key = key;
 		this.data = data;
 	}
 	
-	public Node(int key, double data, Node leftChild, Node rightChild) {
+	public KeyValueNode(int key, double data, KeyValueNode leftChild, KeyValueNode rightChild) {
 		super();
 		this.key = key;
 		this.data = data;
@@ -20,7 +20,7 @@ public class Node {
 		this.rightChild = rightChild;
 	}
 	
-	public void graft(Node branch) {
+	public void graft(KeyValueNode branch) {
 		this.key = branch.getKey();
 		this.data = branch.getData();
 		this.leftChild = branch.getLeftChild();
@@ -43,19 +43,19 @@ public class Node {
 		this.data = data;
 	}
 
-	public Node getLeftChild() {
+	public KeyValueNode getLeftChild() {
 		return leftChild;
 	}
 
-	public void setLeftChild(Node leftChild) {
+	public void setLeftChild(KeyValueNode leftChild) {
 		this.leftChild = leftChild;
 	}
 
-	public Node getRightChild() {
+	public KeyValueNode getRightChild() {
 		return rightChild;
 	}
 
-	public void setRightChild(Node rightChild) {
+	public void setRightChild(KeyValueNode rightChild) {
 		this.rightChild = rightChild;
 	}
 
@@ -80,7 +80,7 @@ public class Node {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Node other = (Node) obj;
+		KeyValueNode other = (KeyValueNode) obj;
 		if (Double.doubleToLongBits(data) != Double.doubleToLongBits(other.data))
 			return false;
 		if (key != other.key)

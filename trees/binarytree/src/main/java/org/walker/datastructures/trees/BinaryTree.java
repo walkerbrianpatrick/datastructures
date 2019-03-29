@@ -3,14 +3,14 @@ package org.walker.datastructures.trees;
 import java.util.function.Consumer;
 
 public class BinaryTree {
-	private Node root;
+	private KeyValueNode root;
 
-	public Node find(int key) {
+	public KeyValueNode find(int key) {
 		return walkFind(root, key);
 	}
 
 	public void insert(int key, double data) {
-		Node child = new Node(key, data); 
+		KeyValueNode child = new KeyValueNode(key, data); 
 		if (root == null) {
 			root = child;
 		} else {
@@ -23,11 +23,11 @@ public class BinaryTree {
 		walkDelete(root,key);
 	}
 
-	public void visitTreeInOrder(Consumer<Node> visitor) {
+	public void visitTreeInOrder(Consumer<KeyValueNode> visitor) {
 		inOrder(root, visitor);
 	}
 	
-	private void inOrder(Node node, Consumer<Node> visitor) {
+	private void inOrder(KeyValueNode node, Consumer<KeyValueNode> visitor) {
 		if (node == null) {
 			return;
 		} else {
@@ -37,7 +37,7 @@ public class BinaryTree {
 		}
 	}
 	
-	private Node walkFind(Node node, int key) {
+	private KeyValueNode walkFind(KeyValueNode node, int key) {
 		// catch the null case
 		if(node == null) {
 			return node;
@@ -53,22 +53,22 @@ public class BinaryTree {
 		}
 	}
 
-	private Node walkDelete(Node node, int key) {
+	private KeyValueNode walkDelete(KeyValueNode node, int key) {
 		// catch the null case
-		Node tempChild;
+		KeyValueNode tempChild;
 		if(node == null) {
 			return node;
 		} // the right case
 		else if (key > node.getKey()) {
 			tempChild = node.getRightChild();
-			Node child = walkDelete(node.getRightChild(), key);
+			KeyValueNode child = walkDelete(node.getRightChild(), key);
 			if (tempChild != child) {
 				node.setRightChild(child);
 			}
 		} // the left case
 		else if (key < node.getKey()) {
 			tempChild = node.getLeftChild();
-			Node child = walkDelete(node.getLeftChild(), key);
+			KeyValueNode child = walkDelete(node.getLeftChild(), key);
 			if (tempChild != child) {
 				node.setLeftChild(child);
 			}
@@ -89,7 +89,7 @@ public class BinaryTree {
 	}
 	
 	
-	private void walkInsert(Node parent, Node child) {
+	private void walkInsert(KeyValueNode parent, KeyValueNode child) {
 		// right path
 		if (child.getKey() > parent.getKey()) {
 			// if no child exists

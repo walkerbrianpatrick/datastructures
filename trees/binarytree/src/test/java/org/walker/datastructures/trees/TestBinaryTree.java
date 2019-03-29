@@ -36,7 +36,7 @@ public class TestBinaryTree {
 		
 		btree.delete(3);
 
-		Node node = btree.find(3);
+		KeyValueNode node = btree.find(3);
 		assert(node == null);
 	}
 	
@@ -47,7 +47,7 @@ public class TestBinaryTree {
 		
 		btree.delete(4);
 
-		Node node = btree.find(4);
+		KeyValueNode node = btree.find(4);
 		assert(node == null);		
 	}
 	
@@ -58,7 +58,7 @@ public class TestBinaryTree {
 		
 		btree.delete(3);
 
-		Node node = btree.find(3);
+		KeyValueNode node = btree.find(3);
 		node = btree.find(4);
 		assert(node.getData() == 42.0);
 	}
@@ -70,7 +70,7 @@ public class TestBinaryTree {
 		
 		btree.delete(5);
 
-		Node node = btree.find(3);
+		KeyValueNode node = btree.find(3);
 		node = btree.find(4);
 		assert(node.getData() == 42.0);		
 	}
@@ -80,7 +80,7 @@ public class TestBinaryTree {
 		BinaryTree btree = new BinaryTree();
 		initSimpleTree(btree);
 		btree.visitTreeInOrder((node)->{
-			System.out.println(((Node)node).getKey());
+			System.out.println(((KeyValueNode)node).getKey());
 		});
 		assert(true);
 	}
