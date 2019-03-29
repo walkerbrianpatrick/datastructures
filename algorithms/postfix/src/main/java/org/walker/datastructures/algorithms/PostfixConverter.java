@@ -81,7 +81,7 @@ public class PostfixConverter {
 		return postfix;
 	}
 
-	private boolean isOperator(char in) {
+	public boolean isOperator(char in) {
 		boolean result = false;
 		for (int i = 0; i < operators.length(); i++) {
 			if (in == operators.charAt(i)) {
@@ -106,7 +106,7 @@ public class PostfixConverter {
 		return leftVal<rightVal;
 	}
 
-	private boolean isLetter(char in) {
+	public boolean isLetter(char in) {
 		int asciivalue = (int) in;
 
 		if (((asciivalue > 64) & (asciivalue < 91)) | // uppercase

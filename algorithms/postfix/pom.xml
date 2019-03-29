@@ -19,6 +19,11 @@
       <artifactId>stack</artifactId>
       <version>1.0</version>
     </dependency>
+  <dependency>
+      <groupId>org.walker.datastructures</groupId>
+      <artifactId>binarytree</artifactId>
+      <version>1.0</version>
+    </dependency>
   </dependencies>
 
 
