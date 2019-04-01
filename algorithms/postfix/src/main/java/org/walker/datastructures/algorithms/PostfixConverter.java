@@ -6,7 +6,7 @@ import org.walker.datastructures.stacksandqueues.StackChar;
 
 public class PostfixConverter {
 	Logger log = LoggerFactory.getLogger(PostfixConverter.class);
-	private String operators;
+	private static String operators;
 	
 	PostfixConverter() {
 		operators = "()*/+-";
@@ -81,7 +81,7 @@ public class PostfixConverter {
 		return postfix;
 	}
 
-	public boolean isOperator(char in) {
+	static public boolean isOperator(char in) {
 		boolean result = false;
 		for (int i = 0; i < operators.length(); i++) {
 			if (in == operators.charAt(i)) {
@@ -106,7 +106,7 @@ public class PostfixConverter {
 		return leftVal<rightVal;
 	}
 
-	public boolean isLetter(char in) {
+	static public boolean isLetter(char in) {
 		int asciivalue = (int) in;
 
 		if (((asciivalue > 64) & (asciivalue < 91)) | // uppercase

@@ -37,13 +37,12 @@ public class TestAlgebraicBinaryTree {
 	@Test
 	public void printAsInfix() {
 		String postfix = "ABC+*";
+		StatefulVisitor sv = new StatefulVisitor();
 		PostfixConverter pcon = new PostfixConverter();
 		AlgebraicBinaryTree abt = new AlgebraicBinaryTree(postfix);
-		// TODO: need to do something with a stateful visitor, 
-		//       which is more complex than should be in a lambda
-		abt.visitInOrder((node)->{
-			System.out.print(node.getSymbol());
-		});
+		
+		abt.visitInOrder(sv::visit);
+		System.out.print(')'); // Hacky, but it works
 		System.out.println();
 		assert true;
 	}
