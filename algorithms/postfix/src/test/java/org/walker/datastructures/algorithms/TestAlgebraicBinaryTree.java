@@ -42,7 +42,7 @@ public class TestAlgebraicBinaryTree {
 		AlgebraicBinaryTree abt = new AlgebraicBinaryTree(postfix);
 		
 		abt.visitInOrder(sv::visit);
-		System.out.print(')'); // Hacky, but it works
+		System.out.print(')'); // Hacky, but I'm going to continue with other problems
 		System.out.println();
 		assert true;
 	}

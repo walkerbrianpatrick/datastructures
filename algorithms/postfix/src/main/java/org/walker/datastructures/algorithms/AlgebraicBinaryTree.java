@@ -41,7 +41,6 @@ public class AlgebraicBinaryTree {
 		root = cuttings.pop();
 	}
 	
-	
 	public void visitInOrder(Consumer <CharNode> visitor) {
 		inOrder(root,visitor);
 	}
@@ -81,5 +80,4 @@ public class AlgebraicBinaryTree {
 			visitor.accept(node);
 		}
 	}
-	
 }

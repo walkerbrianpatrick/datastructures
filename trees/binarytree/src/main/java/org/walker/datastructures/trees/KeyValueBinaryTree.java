@@ -19,7 +19,6 @@ public class KeyValueBinaryTree {
 	}
 
 	public void delete(int key) {
-		// find the node first
 		walkDelete(root,key);
 	}
 
@@ -116,7 +115,45 @@ public class KeyValueBinaryTree {
 		}
 	}
 
+	public int findMinKey() throws Exception {
+		// recursively walk to the left of the tree
+		return minKey(root);
+	}
 	
+	private int minKey(KeyValueNode node) throws Exception {
+		// catch the null case
+		if (node == null) {
+			throw new Exception("The minimum value is not defined for an empty tree.");
+		} else {
+			// if this node has a left child, then go left
+			if (node.getLeftChild()!=null) {
+				return minKey(node.getLeftChild());
+			} // otherwise, this node is the minimum value
+			else {
+				return node.getKey();
+			}
+		}
+	}
+	
+	public int findMaxKey() throws Exception {
+		// recursively walk to the right of the tree
+		return maxKey(root);
+	}
+	
+	private int maxKey(KeyValueNode node) throws Exception {
+		// catch the null case
+		if (node == null) {
+			throw new Exception("The maximum value is not defined for an empty tree.");
+		} else {
+			// if this node has a right child, the go right
+			if (node.getRightChild()!=null) {
+				return maxKey(node.getRightChild());
+			} // otherwise, this node is the maximum value
+			else {
+				return node.getKey();
+			}
+		}
+	}
 	
 	@Override
 	public String toString() {

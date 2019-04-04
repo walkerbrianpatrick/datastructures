@@ -85,6 +85,44 @@ public class TestBinaryTree {
 		assert(true);
 	}
 	
+	@Test
+	public void findMinKey() throws Exception {
+		KeyValueBinaryTree btree = new KeyValueBinaryTree();
+		initSimpleTree(btree);
+		int result = btree.findMinKey();
+		assert(result == 3);
+	}
+	
+	@Test
+	public void exceptionForMinOfEmptyTree() {
+		KeyValueBinaryTree btree = new KeyValueBinaryTree();
+		
+		try {
+			btree.findMinKey();
+		} catch (Exception e) {
+			assert(true);
+		}			
+	}
+	
+	@Test
+	public void findMaxKey() throws Exception {
+		KeyValueBinaryTree btree = new KeyValueBinaryTree();
+		initSimpleTree(btree);
+		int result = btree.findMaxKey();
+		assert(result == 8);		
+	}
+	
+	@Test
+	public void exceptionForMaxOfEmptyTree() {
+		KeyValueBinaryTree btree = new KeyValueBinaryTree();
+		
+		try {
+			btree.findMaxKey();
+		} catch (Exception e) {
+			assert(true);
+		}			
+	}
+	
 	private void initSimpleTree(KeyValueBinaryTree btree) {
 		btree.insert(5, 7.0);
 		btree.insert(3, 11.0);
