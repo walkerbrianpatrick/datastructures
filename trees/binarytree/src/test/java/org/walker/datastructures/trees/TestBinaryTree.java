@@ -67,12 +67,17 @@ public class TestBinaryTree {
 	public void deleteRoot() {
 		KeyValueBinaryTree btree = new KeyValueBinaryTree();
 		initSimpleTree(btree);
-		
-		btree.delete(5);
 
+		btree.delete(5);
+		System.out.println(btree);
 		KeyValueNode node = btree.find(3);
+		assert(node != null);
 		node = btree.find(4);
-		assert(node.getData() == 42.0);		
+		assert(node != null);
+		node = btree.find(8);
+		assert(node != null);
+		node = btree.find(11);
+		assert(node != null);
 	}
 	
 	@Test
@@ -109,7 +114,7 @@ public class TestBinaryTree {
 		KeyValueBinaryTree btree = new KeyValueBinaryTree();
 		initSimpleTree(btree);
 		int result = btree.findMaxKey();
-		assert(result == 8);		
+		assert(result == 11);		
 	}
 	
 	@Test
@@ -128,6 +133,7 @@ public class TestBinaryTree {
 		btree.insert(3, 11.0);
 		btree.insert(4, 42.0);
 		btree.insert(8, 98.0);
+		btree.insert(11, 63.0);
 		
 	}
 }

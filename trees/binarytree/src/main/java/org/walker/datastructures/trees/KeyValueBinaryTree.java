@@ -73,12 +73,18 @@ public class KeyValueBinaryTree {
 			}
 		} // the keys are equal, self delete logic 
 		else {
-			// if it has a left child
-			if(node.getLeftChild()!= null) {
+			// if it has a left child and no right child
+			if(node.getLeftChild()!= null && node.getRightChild() == null) {
 				node.graft(node.getLeftChild());
 			} // if it has a right child, but no left child
-			else if (node.getRightChild() != null) {
+			else if (node.getRightChild() != null && node.getLeftChild() == null) {
 				node.graft(node.getRightChild());
+			} // if it has both children, inorder successor is needed 
+			else if (node.getLeftChild()!=null && node.getRightChild() != null ) {
+				KeyValueNode successor = inOrderSuccessor(node);
+				node.setKey(successor.getKey());
+				node.setData(successor.getData());
+				walkDelete(successor,successor.getKey());
 			} // if it has no children
 			else {
 				return null;
@@ -86,8 +92,24 @@ public class KeyValueBinaryTree {
 		}
 		return node;
 	}
-	
-	
+	// The in order successor is the minimum key to the right of
+	// the current value
+	private KeyValueNode inOrderSuccessor(KeyValueNode node) {
+		return getMinKeyNode(node.getRightChild());
+	}
+
+	private KeyValueNode getMinKeyNode(KeyValueNode node) {
+		if(node == null) {
+			return node;
+		} 
+		else {
+			if (node.getLeftChild()!=null) {
+				return getMinKeyNode(node.getLeftChild());
+			}
+			return node;
+		}
+	}
+
 	private void walkInsert(KeyValueNode parent, KeyValueNode child) {
 		// right path
 		if (child.getKey() > parent.getKey()) {
