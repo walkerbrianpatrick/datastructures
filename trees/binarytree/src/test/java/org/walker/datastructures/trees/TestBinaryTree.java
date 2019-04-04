@@ -128,6 +128,25 @@ public class TestBinaryTree {
 		}			
 	}
 	
+	@Test
+	public void deleteRightChildWithOwnSubtree() {
+		KeyValueBinaryTree btree = new KeyValueBinaryTree();
+
+		btree.insert(50, 1.0);
+		btree.insert(75, 2.0);
+		btree.insert(62, 3.0);
+		btree.insert(87, 4.0);
+		btree.insert(93, 5.0);
+		btree.insert(77, 6.0);
+		
+		btree.delete(50);
+		assert(btree.find(75) != null);
+		assert(btree.find(62) != null);
+		assert(btree.find(87) != null);
+		assert(btree.find(93) != null);
+		assert(btree.find(77) != null);
+	}
+	
 	private void initSimpleTree(KeyValueBinaryTree btree) {
 		btree.insert(5, 7.0);
 		btree.insert(3, 11.0);
