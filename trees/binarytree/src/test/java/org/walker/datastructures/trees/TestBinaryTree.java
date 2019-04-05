@@ -138,6 +138,7 @@ public class TestBinaryTree {
 		btree.insert(87, 4.0);
 		btree.insert(93, 5.0);
 		btree.insert(77, 6.0);
+		btree.insert(79, 43);
 		
 		btree.delete(50);
 		assert(btree.find(75) != null);
@@ -145,6 +146,7 @@ public class TestBinaryTree {
 		assert(btree.find(87) != null);
 		assert(btree.find(93) != null);
 		assert(btree.find(77) != null);
+		assert(btree.find(79) != null);
 	}
 	
 	private void initSimpleTree(KeyValueBinaryTree btree) {
