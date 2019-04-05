@@ -12,7 +12,8 @@
   <packaging>pom</packaging>
 
   <modules>
-	  <module>postfix</module>
+    <module>postfix</module>
+    <module>huffmantree</module>
   </modules>
 
 
