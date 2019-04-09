@@ -9,9 +9,10 @@
 
 
   <modules>
-	  <module>stacks_and_queues</module>
-	  <module>algorithms</module>
-	  <module>trees</module>
+    <module>stacks_and_queues</module>
+    <module>algorithms</module>
+    <module>trees</module>
+    <module>heaps</module>
   </modules>
 
 
