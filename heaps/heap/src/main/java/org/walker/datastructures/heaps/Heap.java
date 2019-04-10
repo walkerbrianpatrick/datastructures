@@ -2,91 +2,113 @@ package org.walker.datastructures.heaps;
 
 import java.util.Arrays;
 
+public class Heap {
 
-import org.walker.datastructures.trees.Node;
-
-public class Heap <T>{
-	
-	// TODO: implement array type nodes as the leftchild and rightchild 
-	//       objects are not needed
-	private Node<T> heapArray[];
+	// TODO: implement array type nodes as the leftchild and rightchild
+	// objects are not needed
+	private Node heapArray[];
 	private int numNodes;
-	
-	@SuppressWarnings("unchecked")
-	Heap (int size){
-		this.heapArray = (Node<T>[]) new Node<?> [size];
+
+	Heap(int size) {
+		this.heapArray = (Node[]) new Node[size];
 		this.numNodes = 0;
 	}
-	
-	public void insert(Node<T> node) {
+
+	public void insert(Node node) {
 		// insert the node in the highest position in the tree
 		heapArray[numNodes] = node;
-		// now trickle up the nodes until it is greater than its children, 
-		// but less than its parent, or it is the root node	
+		// now trickle up the nodes until it is greater than its children,
+		// but less than its parent, or it is the root node
 		trickleUp(numNodes);
-		
-		//increment the node count
+
+		// increment the node count
 		numNodes++;
 	}
-	
+
 	// TODO: this method is inefficient due to the number of copies
 	// it should be replaced with a method that holds the new node
 	// in memory until the final position is identified
 	private void trickleUp(int position) {
 		// handle the root condition
-		if(position == 0) {
+		if (position == 0) {
 			return;
 		}
 		int parentPosition = getParentPosition(position);
-		Node<T> node = heapArray[position];
-		Node<T> parent = heapArray[parentPosition];
-		
-		if(node.getKey() > parent.getKey()) {
+		Node node = heapArray[position];
+		Node parent = heapArray[parentPosition];
+
+		if (node.getKey() > parent.getKey()) {
 			heapArray[parentPosition] = node;
 			heapArray[position] = parent;
 			trickleUp(parentPosition);
 		}
 	}
 
-	public Node<T> remove(){
-		Node<T> result = heapArray[0];
+	public Node remove() {
+		Node result = heapArray[0];
 		// take the last node from the heap
-		heapArray[0] = heapArray[numNodes-1];
+		heapArray[0] = heapArray[numNodes - 1];
 		numNodes--;
 		// trickle it down the tree until it is less than its parent
 		// and greater than its children
-		
-		// recursive function
-		// if one of this node's children is larger than this node,
-		// check which of the node's children is
-		// the largest, swap it with the current node
-		// This must cease if the children are outside of the range of the heap
-		// if they are deleted, or if the node is in the correct position
-		// there is an edge case when the last node is the single child of 
-		//  a parent node that might need explicit handling
-		
+		trickleDown(0);
 		return result;
 	}
-	
-	
-	private int getLeftChildPosition(int position){
-		return 2*position +1;
+
+	// TODO: this method is inefficient due to the number of copies
+	// it should be replaced with a method that holds the new node
+	// in memory until the final position is identified
+	private void trickleDown(int position) {
+		// check to see if there is no left child
+		if (getLeftChildPosition(position) >= size()) {
+			return;
+		}
+		
+		Node parent = heapArray[position];
+		Node leftChild = heapArray[getLeftChildPosition(position)];
+		// right child exists
+		if (getRightChildPosition(position) < size()) {
+			Node rightChild = heapArray[getRightChildPosition(position)];
+			// if the right child is larger
+			if (rightChild.getKey() > leftChild.getKey()) {
+				// is child bigger than current node?
+				if (rightChild.getKey() > parent.getKey()) {
+					// swap to right child place, then recurse to right child
+					heapArray[position] = rightChild;
+					heapArray[getRightChildPosition(position)] = parent;
+					trickleDown(getRightChildPosition(position));
+					return;
+				} // if the left child is larger, or equal
+			}
+		} // otherwise, check if left child is larger
+		if (leftChild.getKey() > parent.getKey()) {
+			// swap to left child place, then recurse to left child
+			heapArray[position] = leftChild;
+			heapArray[getLeftChildPosition(position)] = parent;
+			trickleDown(getLeftChildPosition(position));
+		}
 	}
-	
-	private int getRightChildPosition(int position){
-		return 2*position + 2;
+
+	public int getLeftChildPosition(int position) {
+		return 2 * position + 1;
 	}
-	
-	private int getParentPosition(int position){
-		return (position-1)/2;
+
+	public int getRightChildPosition(int position) {
+		return 2 * position + 2;
 	}
-	
+
+	public int getParentPosition(int position) {
+		return (position - 1) / 2;
+	}
+
+	public Node peek(int position) {
+		return (heapArray[position]);
+	}
 
 	public int size() {
 		return this.numNodes;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

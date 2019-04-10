@@ -1,15 +1,14 @@
 package org.walker.datastructures.heaps;
 
-import org.walker.datastructures.trees.Node;
 
-public class HeapPriorityQueue <T>{
-	private Heap<T> heap;
+public class HeapPriorityQueue {
+	private Heap heap;
 	
-	public void insert(Node<T> node) {
+	public void insert(Node node) {
 		heap.insert(node);
 	}
 	
-	public Node<T> remove() {
+	public Node remove() {
 		return heap.remove();
 	}
 }
