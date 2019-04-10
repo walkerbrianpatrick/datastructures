@@ -59,7 +59,7 @@ public class TestHeap {
 		IntStream ints = new Random().ints(100L);
 		ints.forEach(i -> heap.insert(new Node(i)));
 
-		for (int i = 0; i < 99; i++) {
+		for (int i = 0; i < 100; i++) {
 			heap.remove();
 			assert (checkAllChildrenLess(heap, 0));
 		}
