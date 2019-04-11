@@ -16,31 +16,34 @@ public class Heap {
 
 	public void insert(Node node) {
 		// insert the node in the highest position in the tree
-		heapArray[numNodes] = node;
-		// now trickle up the nodes until it is greater than its children,
+		// then trickle up the nodes until it is greater than its children,
 		// but less than its parent, or it is the root node
-		trickleUp(numNodes);
-
+		trickleUp(numNodes, node);
+		// heapArray[position] = node;
 		// increment the node count
 		numNodes++;
 	}
 
-	// TODO: this method is inefficient due to the number of copies
-	// it should be replaced with a method that holds the new node
-	// in memory until the final position is identified
-	private void trickleUp(int position) {
+	/**
+	 * Check if the current node is larger than its parent if so, switch them
+	 * 
+	 * @param position
+	 */
+	private void trickleUp(int position, Node startingNode) {
 		// handle the root condition
 		if (position == 0) {
+			heapArray[0] = startingNode;
 			return;
 		}
 		int parentPosition = getParentPosition(position);
-		Node node = heapArray[position];
+
 		Node parent = heapArray[parentPosition];
 
-		if (node.getKey() > parent.getKey()) {
-			heapArray[parentPosition] = node;
+		if (startingNode.getKey() > parent.getKey()) {
 			heapArray[position] = parent;
-			trickleUp(parentPosition);
+			trickleUp(parentPosition, startingNode);
+		} else {
+			heapArray[position] = startingNode;
 		}
 	}
 
@@ -58,12 +61,19 @@ public class Heap {
 	// TODO: this method is inefficient due to the number of copies
 	// it should be replaced with a method that holds the new node
 	// in memory until the final position is identified
+
+	/**
+	 * check the current node, see if it is smaller than one of its children if so,
+	 * switch them
+	 * 
+	 * @param position
+	 */
 	private void trickleDown(int position) {
 		// check to see if there is no left child
 		if (getLeftChildPosition(position) >= size()) {
 			return;
 		}
-		
+
 		Node parent = heapArray[position];
 		Node leftChild = heapArray[getLeftChildPosition(position)];
 		// right child exists
@@ -103,6 +113,16 @@ public class Heap {
 
 	public Node peek(int position) {
 		return (heapArray[position]);
+	}
+
+	public void change(int position, int newKey) {
+		int oldKey = heapArray[position].getKey();
+		heapArray[position].setKey(newKey);
+		if (oldKey < newKey) {
+			trickleUp(position, heapArray[position]);
+		} else {
+			trickleDown(position);
+		}
 	}
 
 	public int size() {
