@@ -54,13 +54,9 @@ public class Heap {
 		numNodes--;
 		// trickle it down the tree until it is less than its parent
 		// and greater than its children
-		trickleDown(0);
+		trickleDown(0, heapArray[0]);
 		return result;
 	}
-
-	// TODO: this method is inefficient due to the number of copies
-	// it should be replaced with a method that holds the new node
-	// in memory until the final position is identified
 
 	/**
 	 * check the current node, see if it is smaller than one of its children if so,
@@ -68,13 +64,13 @@ public class Heap {
 	 * 
 	 * @param position
 	 */
-	private void trickleDown(int position) {
+	private void trickleDown(int position, Node startingNode) {
 		// check to see if there is no left child
 		if (getLeftChildPosition(position) >= size()) {
+			heapArray[position] = startingNode;
 			return;
 		}
 
-		Node parent = heapArray[position];
 		Node leftChild = heapArray[getLeftChildPosition(position)];
 		// right child exists
 		if (getRightChildPosition(position) < size()) {
@@ -82,21 +78,22 @@ public class Heap {
 			// if the right child is larger
 			if (rightChild.getKey() > leftChild.getKey()) {
 				// is child bigger than current node?
-				if (rightChild.getKey() > parent.getKey()) {
+				if (rightChild.getKey() > startingNode.getKey()) {
 					// swap to right child place, then recurse to right child
 					heapArray[position] = rightChild;
-					heapArray[getRightChildPosition(position)] = parent;
-					trickleDown(getRightChildPosition(position));
+					trickleDown(getRightChildPosition(position), startingNode);
 					return;
 				} // if the left child is larger, or equal
 			}
 		} // otherwise, check if left child is larger
-		if (leftChild.getKey() > parent.getKey()) {
+		if (leftChild.getKey() > startingNode.getKey()) {
 			// swap to left child place, then recurse to left child
 			heapArray[position] = leftChild;
-			heapArray[getLeftChildPosition(position)] = parent;
-			trickleDown(getLeftChildPosition(position));
+			trickleDown(getLeftChildPosition(position), startingNode);
+			return;
 		}
+
+		heapArray[position] = startingNode;
 	}
 
 	public int getLeftChildPosition(int position) {
@@ -121,7 +118,7 @@ public class Heap {
 		if (oldKey < newKey) {
 			trickleUp(position, heapArray[position]);
 		} else {
-			trickleDown(position);
+			trickleDown(position, heapArray[position]);
 		}
 	}
 
