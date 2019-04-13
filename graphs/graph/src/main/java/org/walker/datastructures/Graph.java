@@ -4,7 +4,12 @@ import java.util.Arrays;
 import java.util.function.Consumer;
 
 import org.walker.datastructures.stacksandqueues.Queue;
-
+/**
+ * Undirected graph class that allows circular connections
+ * Labels are of type char, and are assumed to be unique
+ * @author walker
+ *
+ */
 public class Graph {
 
 	private Vertex[] vertices;
@@ -83,6 +88,9 @@ public class Graph {
 			if (label == vertices[i].getLabel()) {
 				result = i;
 			}
+			if (result!= -1) {
+				break;
+			}
 		}
 		return result;
 	}
@@ -116,37 +124,38 @@ public class Graph {
 		return result;
 	}
 
+	/**
+	 * Use the depth first pattern to visit all vertices connected to 
+	 * a given vertex
+	 * @param vert
+	 * @param visitor
+	 */
 	public void depthFirstVisit(int vert, Consumer<Vertex> visitor) {
+		dfsVisitArray(vert, visitor);
+		setAllVisitedToFalse();
+	}
+	/**
+	 * Alias for depthFirstVisit(int, visitor) 
+	 * Which allows for reference to vertices by label 
+	 * instead of index. There is a lookup cost O(N) associated
+	 * with using this method
+	 * @param label
+	 * @param visitor
+	 */
+	public void depthFirstVisit(char label, Consumer<Vertex> visitor) {
+		depthFirstVisit(getVertexIndex(label), visitor);
+	}
+	
+	private void dfsVisitArray(int vert, Consumer<Vertex> visitor) {
 		// do whatever you were going to do at this vertex
 		visitor.accept(vertices[vert]);
 		vertices[vert].setVisited(true);
 		int nextVertex;
 		while ((nextVertex = findUnvistedNeighbor(vert)) != -1) {
-			depthFirstVisit(nextVertex, visitor);
-		}
+			dfsVisitArray(nextVertex, visitor);
+		}		
 	}
-
-	public void breadthFirstVisit(int vert, Consumer<Vertex> visitor) {
-		Queue<Integer> vertQueue = new Queue<>(numVertices + 1);
-		vertQueue.insert(vert);
-		visitQueue(vertQueue, visitor);
-
-	}
-
-	public void visitQueue(Queue<Integer> vertQueue, Consumer<Vertex> visitor) {
-		if (!vertQueue.isEmpty()) {
-			int currentIndex = vertQueue.remove();
-			// needed to catch cyclic graphs which may add the same node
-			// more than once before it is visited
-			if (!vertices[currentIndex].isVisited()) {
-				visitor.accept(vertices[currentIndex]);
-				vertices[currentIndex].setVisited(true);
-				addUnvisitedNeighborsToQueue(currentIndex, vertQueue);
-				visitQueue(vertQueue, visitor);
-			}
-		}
-	}
-
+	
 	private int findUnvistedNeighbor(int vertIndex) {
 		for (int i = 0; i < numVertices; i++) {
 			// if a neighbor is connected, and unvisted return its index
@@ -157,13 +166,53 @@ public class Graph {
 		return -1;
 	}
 
-	private void addUnvisitedNeighborsToQueue(int vertIndex, Queue<Integer> vertQueue) {
+	/**
+	 * Using a breadth first pattern, visit all nodes of the graph
+	 * @param vert
+	 * @param visitor
+	 */
+	public void breadthFirstVisit(int vert, Consumer<Vertex> visitor) {
+		Queue<Integer> vertQueue = new Queue<>(numVertices);
+		vertQueue.insert(vert);
+		vertices[vert].setVisited(true);
+		bfsVisitQueue(vertQueue, visitor);
+		setAllVisitedToFalse();
+	}
+	
+	/**
+	 * Allowing for reference to the vertices by label instead of index
+	 * @param label
+	 * @param visitor
+	 */
+	public void breadthFirstVisit(char label, Consumer<Vertex> visitor) {
+		breadthFirstVisit(getVertexIndex(label),visitor);
+	}
 
+	private void bfsVisitQueue(Queue<Integer> vertQueue, Consumer<Vertex> visitor) {
+		if (!vertQueue.isEmpty()) {
+			int currentIndex = vertQueue.remove();
+			visitor.accept(vertices[currentIndex]);
+			addUnvisitedNeighborsToQueue(currentIndex, vertQueue);
+			bfsVisitQueue(vertQueue, visitor);
+		}
+		
+	}
+
+	private void addUnvisitedNeighborsToQueue(int vertIndex, Queue<Integer> vertQueue) {
 		for (int i = 0; i < numVertices; i++) {
 			if ((adjMatrix[vertIndex][i] == true) && (vertices[i].isVisited() == false)) {
+				// set visited to true once they enter the queue to prevent
+				// multiple visits to a single node, and to prevent
+				// the N^2 queue size needed to track a fully connected graph
+				vertices[i].setVisited(true);
 				vertQueue.insert(i);
-				;
 			}
+		}
+	}
+	
+	private void setAllVisitedToFalse() {
+		for(int i = 0; i<numVertices; i++) {
+			vertices[i].setVisited(false);
 		}
 	}
 

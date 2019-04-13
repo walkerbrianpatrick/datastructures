@@ -96,4 +96,34 @@ public class TestGraph {
 		System.out.println();
 	}
 	
+	@Test
+	public void breadthFirstVisitFullyConnected() {
+		Graph graph = new Graph(10);
+
+		graph.addVertex(new Vertex('a'));
+		graph.addVertex(new Vertex('b'));
+		graph.addVertex(new Vertex('c'));
+		graph.addVertex(new Vertex('d'));
+		graph.addVertex(new Vertex('e'));
+
+		graph.addEdge('a', 'b');
+		graph.addEdge('a', 'c');
+		graph.addEdge('a', 'd');
+		graph.addEdge('a', 'e');
+		graph.addEdge('b', 'c');
+		graph.addEdge('b', 'd');
+		graph.addEdge('b', 'e');
+		graph.addEdge('c', 'd');
+		graph.addEdge('c', 'e');
+		graph.addEdge('d', 'e');
+		
+		System.out.println("Breadth first Fully Connected:");
+		graph.breadthFirstVisit(0, a -> {
+			System.out.print(a.getLabel());
+		});
+		System.out.println();		
+	}
+	
+	
+	
 }
