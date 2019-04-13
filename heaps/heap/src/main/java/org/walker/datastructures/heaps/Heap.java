@@ -6,11 +6,11 @@ public class Heap {
 
 	// TODO: implement array type nodes as the leftchild and rightchild
 	// objects are not needed
-	private Node heapArray[];
+	private Node [] heapArray;
 	private int numNodes;
 
-	Heap(int size) {
-		this.heapArray = (Node[]) new Node[size];
+	public Heap(int size) {
+		this.heapArray = new Node[size];
 		this.numNodes = 0;
 	}
 
