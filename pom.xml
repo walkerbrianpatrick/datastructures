@@ -13,6 +13,7 @@
     <module>algorithms</module>
     <module>trees</module>
     <module>heaps</module>
+    <module>graphs</module>
   </modules>
 
 
